@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+          routes:
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/users/**
+            - id: event-service
+              uri: lb://EVENT-SERVICE
+              predicates:
+                - Path=/api/events/**
+            - id: ticket-service
+              uri: lb://TICKET-SERVICE
+              predicates:
+                - Path=/api/tickets/**
+            - id: order-service
+              uri: lb://ORDER-SERVICE
+              predicates:
+                - Path=/api/orders/**
+
+          default-filters:
+            - AddResponseHeader=X-Gateway, SpringCloud
+      logging:
+        level:
+          org.springframework.security: DEBUG
+          org.springframework.cloud.gateway: DEBUG
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
