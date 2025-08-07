@@ -18,12 +18,27 @@ public class Notification {
     private Long id;
 
     private Long orderId;
+
     private String eventId;
+
     private String email;
+
     private String message;
-    private String type; // CONFIRMATION, REMINDER, CANCELLATION
-    private String status; // PENDING, SENT, FAILED
+
+    private String type; // e.g. CONFIRMATION, REMINDER, CANCELLATION, PAYMENT
+
+    private String status; // e.g. PENDING, SENT, FAILED, COMPLETED
+
     private LocalDateTime scheduledAt;
+
     private LocalDateTime sentAt;
-    private LocalDateTime createdAt = LocalDateTime.now();
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 }

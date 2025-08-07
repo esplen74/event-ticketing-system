@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,13 @@ public class NotificationService {
         if ("SENT".equalsIgnoreCase(status)) {
             notification.setSentAt(LocalDateTime.now());
         }
+        return notificationRepository.save(notification);
+    }
+    public Optional<Notification> getByOrderId(Long orderId) {
+        return notificationRepository.findByOrderId(orderId);
+    }
+
+    public Notification updateNotification(Notification notification) {
         return notificationRepository.save(notification);
     }
 }

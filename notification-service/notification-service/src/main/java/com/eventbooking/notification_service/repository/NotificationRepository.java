@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findByStatusAndScheduledAt(String status, LocalDateTime scheduledAt);
+    Optional<Notification> findByOrderId(Long orderId);
 }

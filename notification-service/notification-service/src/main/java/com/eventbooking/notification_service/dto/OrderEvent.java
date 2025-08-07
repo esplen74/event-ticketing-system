@@ -5,9 +5,11 @@ import lombok.Data;
 @Data
 public class OrderEvent {
     private Long orderId;
+    private String userId;
     private String eventId;
+    private Integer quantity;
     private String email;
     private String message;
-    private String type; // CONFIRMATION, REMINDER, CANCELLATION
-    private String scheduledAt; // ISO String
+    private String type;
+    private String scheduledAt; // ISO format string
 }
