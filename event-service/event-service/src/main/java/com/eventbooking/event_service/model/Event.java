@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +20,8 @@ public class Event {
     private String description;
     private String location;
     private LocalDate date;
+    private String imageUrl;
+    private List<String> gallery;
     private int totalTickets;
     private int availableTickets;
 }

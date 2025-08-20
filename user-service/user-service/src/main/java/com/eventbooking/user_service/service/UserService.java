@@ -19,8 +19,8 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void register(RegisterRequest request) {
-        if (userRepository.findByEmail(request.email()).isPresent()) {
-            throw new RuntimeException("Email already registered");
+        if (userRepository.findByUsername(request.username()).isPresent()) {
+            throw new RuntimeException("Username already registered");
         }
 
         User user = new User();
@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public Optional<User> login(LoginRequest request) {
-        return userRepository.findByEmail(request.email())
+        return userRepository.findByUsername(request.username())
                 .filter(user -> passwordEncoder.matches(request.password(), user.getPassword()));
     }
 }
