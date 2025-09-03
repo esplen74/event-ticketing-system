@@ -46,7 +46,7 @@ export default function LoginPage() {
 
     try {
       const res = await api.post<LoginResponse>("/users/login", { username, password });
-      alert("Đăng nhập thành công!");
+      // alert("Đăng nhập thành công!");
 
       const { token, user } = res.data;
 
