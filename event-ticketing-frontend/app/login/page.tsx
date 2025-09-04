@@ -1,13 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
-import { Box, TextField, Button, Typography, Paper, InputAdornment } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  InputAdornment,
+} from "@mui/material";
 import { motion } from "framer-motion";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useRouter } from "next/navigation";
 
-// Khai báo interface cho phản hồi login
 interface LoginResponse {
   token: string;
   user: {
@@ -25,14 +31,14 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    api.get("/users/me", { headers: { Authorization: `Bearer ${token}` } })
-      .then(() => router.push("/events"))
-      .catch(() => localStorage.removeItem("token"));
-  }
-}, []);
-
+    const token = localStorage.getItem("token");
+    if (token) {
+      api
+        .get("/users/me", { headers: { Authorization: `Bearer ${token}` } })
+        .then(() => router.push("/events"))
+        .catch(() => localStorage.removeItem("token"));
+    }
+  }, []);
 
   const handleLogin = async () => {
     setLoading(true);
@@ -45,12 +51,13 @@ export default function LoginPage() {
     }
 
     try {
-      const res = await api.post<LoginResponse>("/users/login", { username, password });
-      // alert("Đăng nhập thành công!");
+      const res = await api.post<LoginResponse>("/users/login", {
+        username,
+        password,
+      });
 
       const { token, user } = res.data;
 
-      // Lưu token + thông tin user
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
@@ -82,7 +89,10 @@ export default function LoginPage() {
         transition={{ duration: 0.7, type: "spring" }}
         style={{ width: "100%", maxWidth: 400 }}
       >
-        <Paper elevation={8} sx={{ p: 4, borderRadius: 4, backdropFilter: "blur(2px)" }}>
+        <Paper
+          elevation={8}
+          sx={{ p: 4, borderRadius: 4, backdropFilter: "blur(2px)" }}
+        >
           <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
             <motion.div
               initial={{ rotate: -20 }}

@@ -51,14 +51,16 @@ export default function EventDetailPage() {
       <Box
         sx={{
           backgroundImage: `url(${
-            event?.imageUrl && event.imageUrl.startsWith("http")
-              ? event.imageUrl
+            event?.imageUrl
+              ? event.imageUrl.startsWith("http")
+                ? event.imageUrl
+                : `/images/${event.imageUrl.replace("/images/", "")}`
               : "/images/default-banner.png"
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-        className="h-[350px] rounded-2xl relative shadow-lg"
+        className="h-[350px] rounded-h2xl relative shadow-lg"
       >
         <Box className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 rounded-b-2xl">
           <Typography variant="h4" fontWeight="bold">

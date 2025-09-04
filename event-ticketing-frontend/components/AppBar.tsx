@@ -3,13 +3,21 @@
 import Link from "next/link";
 import { Home, Ticket, Info, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function AppBar() {
   return (
     <header className="w-full shadow-md bg-gradient-to-r from-blue-600 to-blue-800 text-white">
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <Link href="/" className="text-xl font-bold tracking-wide">
-          🎶 EventBooking
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/logo.png"
+            alt="EventBooking Logo"
+            width={40}
+            height={40}
+            className="rounded-md"
+          />
+          <span className="text-xl font-bold tracking-wide">EventBooking</span>
         </Link>
 
         <nav className="hidden md:flex gap-6 text-sm font-medium">
